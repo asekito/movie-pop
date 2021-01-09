@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li>
+            @Html.ActionLink("Add A Meal", "AddMeal", "Meal", new { area = "" }, null)
+            </li>
+            <li>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)
+            </li>
+        </ul>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
