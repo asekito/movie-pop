@@ -7,7 +7,7 @@ namespace App1.Controllers
 {
     public class MovieController : Controller
     {
-        public IActionResult AddMovie()
+        public IActionResult MovieList()
         {
             try
             {
@@ -17,23 +17,31 @@ namespace App1.Controllers
                 //using var connect = new SQLiteConnection("Data Source=App1Db.db;");
                 connect.Open();
 
-                string data = "SELECT * FROM Meals";
+                string data = "SELECT * FROM Movies";
                 using var cmd = new SQLiteCommand(data, connect);
                 using SQLiteDataReader rdr = cmd.ExecuteReader();
 
+                Console.WriteLine(rdr);
+                Console.WriteLine(rdr.NextResult());
+                Console.WriteLine(rdr.NextResult());
+                while (rdr.Read())
+                {
+                    Console.WriteLine(rdr.NextResult());
+                }
+
+                return View();
                 // need to finish this and handle the data and send to view 
             }
             catch (Exception e)
             {
                 return View(e);
             }
-            return View();
         }
 
-        public IActionResult MovieList()
-        {
-            return View();
-        }
+        //public IActionResult MovieList()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public IActionResult Create(Movie movie)
