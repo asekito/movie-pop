@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Data.SQLite;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using App1.Models;
 
@@ -21,15 +23,29 @@ namespace App1.Controllers
                 using var cmd = new SQLiteCommand(data, connect);
                 using SQLiteDataReader rdr = cmd.ExecuteReader();
 
-                Console.WriteLine(rdr);
-                Console.WriteLine(rdr.NextResult());
-                Console.WriteLine(rdr.NextResult());
+
+                //DataTable dt = new DataTable();
+
+                //dt.Load(rdr);
+
+
+                List<Movie> movieList = new List<Movie>();
+                Movie movie = null;
+
                 while (rdr.Read())
                 {
-                    Console.WriteLine(rdr.NextResult());
+                    movie = new Movie();
+                    movie.title = rdr["Title"].ToString();
+                    movie.director = rdr["Director"].ToString();
+                    movie.releaseDate = Convert.ToDateTime(rdr["ReleaseDate"]);
+                    movie.genre = rdr["Genre"].ToString();
+                    movie.duration = rdr["Duration"].ToString();
+                    movie.summary = rdr["Summary"].ToString();
+
+                    movieList.Add(movie);
                 }
 
-                return View();
+                return View("MovieList", movieList);
                 // need to finish this and handle the data and send to view 
             }
             catch (Exception e)
@@ -38,10 +54,10 @@ namespace App1.Controllers
             }
         }
 
-        //public IActionResult MovieList()
-        //{
-        //    return View();
-        //}
+        public IActionResult AddMovie()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Create(Movie movie)

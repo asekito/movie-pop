@@ -1,5 +1,21 @@
-﻿@{ }
+﻿@*@using App1.Models*@
+@model IEnumerable<App1.Models.Movie>
+
+@{
+    @*Layout = null;*@
+}
 
 <div>
     <h1>Movie List</h1>
+    @foreach (var movie in Model)
+    {
+        <div>
+            <div>@movie.title</div>
+            <div>@movie.director</div>
+            <div>@movie.genre</div>
+            <div>@movie.duration</div>
+            <div>@movie.releaseDate</div>
+            <div>@movie.summary</div>
+        </div>
+    }
 </div>
