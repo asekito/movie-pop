@@ -7,7 +7,7 @@
   <ItemGroup>
     <Folder Include="Views\Shared\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Meal\" />
+    <Folder Include="Views\Movie\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
